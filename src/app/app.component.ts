@@ -8,7 +8,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class AppComponent implements OnInit {
   statusOptions = ['stable', 'critical', 'finished']
-  projectData: FormGroup;
+  projectData!: FormGroup;
 
   ngOnInit() {
     this.projectData = new FormGroup({

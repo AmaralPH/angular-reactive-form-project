@@ -42,6 +42,18 @@
             id="mail"
             formControlName="mail"
             class="form-control">
+          <span
+            *ngIf="projectForm.get('mail').invalid && projectForm.get('mail').touched"
+            class="help-block">
+            <span
+              *ngIf="projectForm.get('mail').errors['email']">
+              This is not a valid email format.
+            </span>
+            <span
+              *ngIf="projectForm.get('mail').errors['required']">
+              Mail is required.
+            </span>
+          </span>
         </div>
         <div class="status">
           <label for="status">Project Status</label>

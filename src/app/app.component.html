@@ -23,14 +23,15 @@
             formControlName="projectName"
             class="form-control">
           <span
-            *ngIf="projectForm.get('projectName').invalid && projectForm.get('projectName').touched"
+            *ngIf="!projectForm.get('projectName')?.hasError('invalid') &&
+            projectForm.get('projectName')?.touched"
             class="help-block">
             <span
-              *ngIf="projectForm.get('projectName').errors['invalidProjectName']">
+              *ngIf="projectForm.get('projectName')?.hasError('invalidProjectName')">
               This project name is invalid.
             </span>
             <span
-              *ngIf="projectForm.get('projectName').errors['required']">
+              *ngIf="projectForm.get('projectName')?.hasError('required')">
               Project name is required.
             </span>
           </span>
@@ -43,14 +44,15 @@
             formControlName="mail"
             class="form-control">
           <span
-            *ngIf="projectForm.get('mail').invalid && projectForm.get('mail').touched"
+            *ngIf="!projectForm.get('mail')?.errors?.['valid'] &&
+            projectForm.get('mail')?.touched"
             class="help-block">
             <span
-              *ngIf="projectForm.get('mail').errors['email']">
+              *ngIf="projectForm.get('mail')?.errors?.['email']">
               This is not a valid email format.
             </span>
             <span
-              *ngIf="projectForm.get('mail').errors['required']">
+              *ngIf="projectForm.get('mail')?.errors?.['required']">
               Mail is required.
             </span>
           </span>
@@ -65,7 +67,12 @@
             <option *ngFor="let status of statusOptions" [value]="status">{{ status | titlecase }}</option>
           </select>
         </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button
+          [disabled]="!projectForm.valid"
+          class="btn btn-primary"
+          type="submit">
+          Submit
+        </button>
       </form>
     </div>
   </div>
